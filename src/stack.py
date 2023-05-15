@@ -1,34 +1,59 @@
+from typing import Any, Optional
+
+
 class Node:
-    """Класс для узла стека"""
-
-    def __init__(self, data, next_node):
-        """
-        Конструктор класса Node
-
-        :param data: данные, которые будут храниться в узле
-        """
-        pass
+    def __init__(self, data: Any, next_node: Optional['Node'] = None) -> None:
+        self.data = data
+        self.next_node = next_node
 
 
 class Stack:
-    """Класс для стека"""
+    def __init__(self) -> None:
+        self.top = None
 
-    def __init__(self):
-        """Конструктор класса Stack"""
-        pass
-
-    def push(self, data):
+    def is_empty(self):
         """
-        Метод для добавления элемента на вершину стека
+        Проверяет, пуст ли стек.
 
-        :param data: данные, которые будут добавлены на вершину стека
+        Returns:
+            bool: True, если стек пуст; False, если стек не пуст.
         """
-        pass
+        return self.top is None
 
-    def pop(self):
+    def push(self, data: Any) -> None:
         """
-        Метод для удаления элемента с вершины стека и его возвращения
+        Добавляет элемент в стек.
 
-        :return: данные удаленного элемента
+        Args:
+            data (Any): Элемент, который нужно добавить в стек.
         """
-        pass
+        new_node = Node(data, self.top)
+        new_node.next = self.top
+        self.top = new_node
+
+    def pop(self) -> Any:
+        """
+        Удаляет и возвращает верхний элемент стека.
+
+        Returns:
+            Optional[Any]: Значение верхнего элемента стека или None, если стек пуст.
+        """
+        if self.is_empty():
+            return None
+        popped_node = self.top
+        self.top = self.top.next
+        popped_node.next = None
+        return popped_node.data
+
+    def peek(self) -> Optional[Any]:
+        """
+        Возвращает значение верхнего элемента стека без его удаления.
+
+        Returns:
+            Optional[Any]: Значение верхнего элемента стека или None, если стек пуст.
+        """
+        if self.is_empty():
+            return None
+        return self.top.data
+
+
