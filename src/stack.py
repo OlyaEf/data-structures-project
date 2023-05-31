@@ -11,6 +11,9 @@ class Stack:
     def __init__(self) -> None:
         self.top = None
 
+    def __str__(self) -> str:
+        return f"{self.__class__.__name__}: ({self.top.data if self.top else None})"
+
     def is_empty(self):
         """
         Проверяет, пуст ли стек.

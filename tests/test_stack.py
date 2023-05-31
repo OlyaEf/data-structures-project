@@ -10,6 +10,34 @@ def test_empty_stack():
     assert stack.peek() is None
 
 
+def test_str_method():
+    stack = Stack()
+
+    # Проверяем, что при создании стека строковое представление пустое
+    assert str(stack) == "Stack: (None)"
+
+    # Добавляем элементы в стек
+    stack.push('data1')
+    stack.push('data2')
+    stack.push('data3')
+
+    # Проверяем, что строковое представление содержит верное количество элементов
+    assert str(stack) == "Stack: (data3)"
+
+    # Удаляем верхний элемент стека
+    stack.pop()
+
+    # Проверяем, что строковое представление обновилось после удаления элемента
+    assert str(stack) == "Stack: (data2)"
+
+    # Удаляем оставшиеся элементы
+    stack.pop()
+    stack.pop()
+
+    # Проверяем, что после удаления всех элементов стека строковое представление пустое
+    assert str(stack) == "Stack: (None)"
+
+
 def test_stack_operations():
     stack = Stack()
     stack.push(1)
